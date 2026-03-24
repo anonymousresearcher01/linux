@@ -1,0 +1,1 @@
+qemu-system-x86_64     -enable-kvm     -m 8G     -smp 4     -hda ~/qemu-vm/ubuntu-kernel-dev2.qcow2     -nographic     -serial mon:stdio     -machine q35     -net nic     -net user,hostfwd=tcp::2222-:22
