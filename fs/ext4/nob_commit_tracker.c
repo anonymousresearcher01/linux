@@ -5,7 +5,7 @@
 
 struct nob_commit_tracker g_nob_tracker;
 
-void nob_tracker_list(void){
+void nob_tracker_init(void){
     hash_init(g_nob_tracker.pending);
     hash_init(g_nob_tracker.committed);
     spin_lock_init(&g_nob_tracker.spinlock);
@@ -14,7 +14,7 @@ void nob_tracker_list(void){
 
 int nob_pending_add(unsigned long ino){
     struct nob_pending_entry *entry;
-    entry = kmalloc(sizeof(*e), GFP_KERNEL);
+    entry = kmalloc(sizeof(*entry), GFP_KERNEL);
     if (!entry)
         return -ENOMEM;
     
@@ -66,7 +66,7 @@ void nob_move_to_committed(unsigned long ino){
 
 void nob_commiited_erase(unsigned long ino)
 {
-    struct nob_committed_entry * entry;
+    struct nob_committed_entry *entry;
     spin_lock(&g_nob_tracker.spinlock);
     hash_for_each_possible(g_nob_tracker.committed, entry, node, ino) {
         if (entry->ino == ino){

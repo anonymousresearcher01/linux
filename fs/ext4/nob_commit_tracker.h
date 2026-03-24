@@ -7,7 +7,7 @@
 #include <linux/spinlock.h>
 #include <linux/hashtable.h>
 
-#define NOT_HASH_BITS 8
+#define NOB_HASH_BITS 8
 
 struct nob_pending_entry{
     unsigned long ino;
